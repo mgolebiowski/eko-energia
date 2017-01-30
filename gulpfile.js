@@ -34,8 +34,15 @@ gulp.task('styles', function(){
     .pipe(gulp.dest('src/dist/styles'));
 });
 
+gulp.task('js', function(){
+  var injectFilesJS = gulp.src(['src/dev/core.js']);
+
+  return injectFilesJS.pipe(gulp.dest('src/dist/js'));
+});
+
 gulp.task('html', ['styles'], function(){
   var injectFiles = gulp.src(['src/dist/styles/style.css']);
+
 
   var injectOptions = {
     addRootSlash: false,
@@ -45,6 +52,7 @@ gulp.task('html', ['styles'], function(){
   return gulp.src('src/dev/index.html')
     .pipe(inject(injectFiles, injectOptions))
     .pipe(wiredep())
+    .pipe(inject(gulp.src(['src/dist/js/core.js']), injectOptions))
     .pipe(gulp.dest('src/dist'));
 });
 

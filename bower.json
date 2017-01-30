@@ -1,0 +1,21 @@
+{
+  "name": "eko-energia",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "mgol <michal.golabek94@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}

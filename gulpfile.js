@@ -40,7 +40,7 @@ gulp.task('js', function(){
   return injectFilesJS.pipe(gulp.dest('src/dist/js'));
 });
 
-gulp.task('html', ['styles'], function(){
+gulp.task('html', ['styles', 'js'], function(){
   var injectFiles = gulp.src(['src/dist/styles/style.css']);
 
 

@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var inject = require('gulp-inject');
 var wiredep = require('wiredep').stream;
+var watch = require('gulp-watch');
 
 gulp.task('styles', function(){
   var injectAppFiles = gulp.src('src/dev/styles/*.scss', {read: false});
@@ -45,4 +46,12 @@ gulp.task('html', ['styles'], function(){
     .pipe(inject(injectFiles, injectOptions))
     .pipe(wiredep())
     .pipe(gulp.dest('src/dist'));
+});
+
+gulp.task('stream', function () {
+    // Endless stream mode
+    gulp.watch('src/dev/*.html', ['html'], { ignoreInitial: false });
+    gulp.watch('src/dev/*.scss', ['html'], { ignoreInitial: false });
+    gulp.watch('src/dev/global/*.scss', ['html'], { ignoreInitial: false });
+    gulp.watch('src/dev/styles/*.scss', ['html'], { ignoreInitial: false });
 });

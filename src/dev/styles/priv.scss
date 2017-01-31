@@ -4,8 +4,44 @@
 .section{
   margin-top: -14px;
 
-  h1{
+  h1,h2,h3,h4,h5{
     @extend .text-center;
-    padding-top: 40vh;
+  }
+}
+#s1{
+  @extend .text-center;
+  img{
+    @media screen and (max-width: $screen-xs-max){
+      width: 200px;
+    }
+    @media screen and (min-width: $screen-sm-min){
+      width: 350px;
+    }
+    padding-top: 10vh;
+  }
+}
+#s2{
+  h1{
+    padding-top: 10vh;
+  }
+}
+#counters{
+  text-align: center;
+  .counter-container{
+    display:inline-block;
+    text-align: center;
+    .counter{
+      @media screen and (max-width: $screen-xs-max){
+        width: 50px;
+        height: 50px;
+      }
+      @media screen and (min-width: $screen-sm-min){
+        width: 100px;
+        height: 100px;
+      }
+
+      position: relative;
+      margin: 40px;
+    }
   }
 }

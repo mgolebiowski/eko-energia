@@ -1,8 +1,12 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var inject = require('gulp-inject');
+var concat = require('gulp-concat');
 var wiredep = require('wiredep').stream;
+var gulpBowerFiles = require('gulp-bower-files');
 var watch = require('gulp-watch');
+var uglify = require('gulp-uglify');
+var cleanCSS = require('gulp-clean-css');
 
 gulp.task('styles', function(){
   var injectAppFiles = gulp.src('src/dev/styles/*.scss', {read: false});
@@ -31,12 +35,18 @@ gulp.task('styles', function(){
     .pipe(inject(injectGlobalFiles, injectGlobalOptions))
     .pipe(inject(injectAppFiles, injectAppOptions))
     .pipe(sass())
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest('src/dist/styles'));
 });
 
 gulp.task('js', function(){
   var injectFilesJS = gulp.src(['src/dev/core.js']);
+  var jsdep = require('wiredep')().js;
 
+  gulp.src(jsdep)
+    .pipe(concat('libs.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('src/dist/js/'));
   return injectFilesJS.pipe(gulp.dest('src/dist/js'));
 });
 
@@ -51,15 +61,16 @@ gulp.task('html', ['styles', 'js'], function(){
 
   return gulp.src('src/dev/index.html')
     .pipe(inject(injectFiles, injectOptions))
-    .pipe(wiredep())
-    .pipe(inject(gulp.src(['src/dist/js/core.js']), injectOptions))
+    .pipe(inject(gulp.src(['src/dist/js/libs.js','src/dist/js/core.js']), injectOptions))
     .pipe(gulp.dest('src/dist'));
 });
 
 gulp.task('stream', function () {
     // Endless stream mode
-    gulp.watch('src/dev/*.html', ['html'], { ignoreInitial: false });
-    gulp.watch('src/dev/*.scss', ['html'], { ignoreInitial: false });
-    gulp.watch('src/dev/global/*.scss', ['html'], { ignoreInitial: false });
-    gulp.watch('src/dev/styles/*.scss', ['html'], { ignoreInitial: false });
+      gulp.watch('src/dev/*.html', ['html'], { ignoreInitial: false });
+      gulp.watch('src/dev/*.js', ['html'], { ignoreInitial: false });
+      gulp.watch('src/dev/*.scss', ['styles'], { ignoreInitial: false });
+      gulp.watch('src/dev/global/*.scss', ['styles'], { ignoreInitial: false });
+      gulp.watch('src/dev/styles/*.scss', ['styles'], { ignoreInitial: false });
+
 });

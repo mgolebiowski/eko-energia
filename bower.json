@@ -17,6 +17,8 @@
   ],
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
-    "fullpage.js": "^2.9.2"
+    "fullpage.js": "^2.9.2",
+    "progressbar.js":"^1.0.1"
+
   }
 }

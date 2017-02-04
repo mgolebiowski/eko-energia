@@ -1,0 +1,1 @@
+in bower package "iscroll" in file .bower.json you need to add "main":"build/iscroll.js" to add iscroll with wiredep.

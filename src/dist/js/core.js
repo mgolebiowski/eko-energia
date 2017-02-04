@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    $('#fullpage').fullpage({
-      menu: '#mainMenu',
-      responsiveWidth: 1100
-    });
-});
 var barNums = [11,18,23,65,5];
 var barPrefs = [];
 var bars = [];
@@ -37,5 +31,22 @@ for(var i=0; i<5; i++){
   bars[i]=new ProgressBar.Circle("#c"+(i+1), barPrefs[i]);
   bars[i].text.style.fontSize = '3rem';
   bars[i].text.style.color = '#000';
-  bars[i].animate(1.0);  // Number from 0.0 to 1.0
+
 }
+
+$(document).ready(function() {
+    $('#fullpage').fullpage({
+      menu: '#mainMenu',
+      scrollOverflow: true,
+      afterLoad: function(anchorLink, index){
+        if(index === 2)
+        {
+          for(i=0;i<5;i++)
+          {
+            bars[i].animate(1.0);  // Number from 0.0 to 1.0
+          }
+        }
+      }
+    });
+
+});

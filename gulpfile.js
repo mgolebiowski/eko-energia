@@ -42,7 +42,6 @@ gulp.task('styles', function(){
 gulp.task('js', function(){
   var injectFilesJS = gulp.src(['src/dev/core.js']);
   var jsdep = require('wiredep')().js;
-
   gulp.src(jsdep)
     .pipe(concat('libs.js'))
     .pipe(uglify())
@@ -66,11 +65,11 @@ gulp.task('html', ['styles', 'js'], function(){
 });
 
 gulp.task('stream', function () {
-    // Endless stream mode
-      gulp.watch('src/dev/*.html', ['html'], { ignoreInitial: false });
-      gulp.watch('src/dev/*.js', ['html'], { ignoreInitial: false });
-      gulp.watch('src/dev/*.scss', ['styles'], { ignoreInitial: false });
-      gulp.watch('src/dev/global/*.scss', ['styles'], { ignoreInitial: false });
-      gulp.watch('src/dev/styles/*.scss', ['styles'], { ignoreInitial: false });
+  // Endless stream mode
+  gulp.watch('src/dev/*.html', ['html'], { ignoreInitial: false });
+  gulp.watch('src/dev/*.js', ['js'], { ignoreInitial: false });
+  gulp.watch('src/dev/*.scss', ['styles'], { ignoreInitial: false });
+  gulp.watch('src/dev/global/*.scss', ['styles'], { ignoreInitial: false });
+  gulp.watch('src/dev/styles/*.scss', ['styles'], { ignoreInitial: false });
 
 });

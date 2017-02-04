@@ -1,11 +1,16 @@
 .navbar-brand{
   padding-top: 0;
+  img{
+    transform: scale(0.85);
+  }
 }
 .section{
   margin-top: -14px;
-
   h1,h2,h3,h4,h5{
     @extend .text-center;
+  }
+  h4{
+    line-height: 38px;
   }
 }
 #s1{
@@ -28,20 +33,33 @@
 #counters{
   text-align: center;
   .counter-container{
-    display:inline-block;
-    text-align: center;
     .counter{
-      @media screen and (max-width: $screen-xs-max){
-        width: 50px;
-        height: 50px;
-      }
-      @media screen and (min-width: $screen-sm-min){
-        width: 100px;
-        height: 100px;
-      }
-
       position: relative;
       margin: 40px;
+    }
+    @media screen and (max-width: $screen-xs-max){
+      text-align: left;
+      display:block;
+      .counter{
+        width: 50px;
+        height: 50px;
+        display:inline-block;
+        margin: 20px 10px 0 10px;
+      }
+      h5{
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 20px;
+
+      }
+    }
+    @media screen and (min-width: $screen-sm-min){
+      display:inline-block;
+      .counter{
+        width: 100px;
+        height: 100px;
+        display:block;
+      }
     }
   }
 }

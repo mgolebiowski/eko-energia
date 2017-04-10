@@ -30,6 +30,13 @@ gulp.task('styles', function(){
     addRootSlash: false
   };
 
+  var injectFPOptions = {
+    transform: transformFilepath,
+    starttag: '// inject:fp',
+    endtag: '// endinject',
+    addRootSlash: false
+  };
+  //ToDo: the file fulpage.min.css is not included by wiredep <sad_panda> I added it manually, but it need to be done by gulp asap
   return gulp.src('src/dev/style.scss')
     .pipe(wiredep())
     .pipe(inject(injectGlobalFiles, injectGlobalOptions))
